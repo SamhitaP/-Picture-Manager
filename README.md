@@ -49,7 +49,7 @@ If 8080 is unavailable you can choose the port number used to run the applicatio
 3. Verify docker is installed using `docker --version` in the terminal<br/>
 4. Run cmd `docker load -i <path to tar file>`, here tar file is the downloaded project image<br/>
 5. `docker images` should list the image `catpicturesimage`<br/>
-6. Now, go to path `Picture-Manager/src/main/resources/docker-compose.yml` in your terminal and run cmd `docker-compose up`<br/>
+6. Now, go to path `Picture-Manager/src/main/resources`(runs docker-compose.yml) in your terminal and run cmd `docker-compose up`<br/>
 7. This will show you the tomcat log in the terminal<br/><br/>
    
 <img width="1243" alt="Screenshot 2024-02-05 at 9 25 25 PM" src="https://github.com/SamhitaP/-Picture-Manager/assets/15332866/3ed0b132-6d5c-4a16-8540-5fa5ddd08344">
