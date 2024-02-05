@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
+// Database entity for cat picture file
 @Data
 @Document(collection="images")
 @AllArgsConstructor

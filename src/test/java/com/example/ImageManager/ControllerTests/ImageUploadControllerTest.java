@@ -32,6 +32,9 @@ public class ImageUploadControllerTest {
     private MockMvc mockMvc;
 
     private String URI = "/images";
+    private final String image = "image";
+    private final String id = "id";
+    private final String newImage = "newimage";
 
     @BeforeEach
     void setUp() {
@@ -41,10 +44,10 @@ public class ImageUploadControllerTest {
     @Disabled
     @Test
     public void uploadImageTestSuccess() throws Exception {
-        String path = "src/main/resources/static/media.png";
+        String path = "src/main/resources/static/largeimage.jpeg";
         File fi = new File(path);
         String originalFileName = path.substring(path.lastIndexOf("/")+1,path.length());
-        MockMultipartFile mockedFile = new MockMultipartFile("image", originalFileName, "multipart/form-data", Files.readAllBytes(fi.toPath()));
+        MockMultipartFile mockedFile = new MockMultipartFile(image, originalFileName, "multipart/form-data", Files.readAllBytes(fi.toPath()));
         MvcResult result = mockMvc.perform(multipart(URI+"/catpicture/upload")
                                 .file(mockedFile)
                                 .contentType(MediaType.MULTIPART_FORM_DATA)
@@ -60,7 +63,7 @@ public class ImageUploadControllerTest {
     @Test
     void uploadImageBadRequest() throws Exception {
 
-        MockMultipartFile invalidFile  = new MockMultipartFile("image", null, "multipart/form-data", new byte[0]);
+        MockMultipartFile invalidFile  = new MockMultipartFile(image, null, "multipart/form-data", new byte[0]);
         MvcResult result = mockMvc.perform(multipart(HttpMethod.POST,URI+"/catpicture/upload")
                         .file(invalidFile)
                         .accept(MediaType.ALL))
@@ -74,7 +77,7 @@ public class ImageUploadControllerTest {
         String validId = "65bf95bc9765a86be6600240";
 
         MvcResult result = mockMvc.perform(get(URI+"/catpicture/one")
-                .param("id",validId))
+                .param(id,validId))
                 .andReturn();
 
 
@@ -87,7 +90,7 @@ public class ImageUploadControllerTest {
         String invalidId = null;
 
         MvcResult result = mockMvc.perform(get(URI+"/catpicture/one")
-                        .param("id",invalidId))
+                        .param(id,invalidId))
                 .andReturn();
 
         Assertions.assertEquals(400, result.getResponse().getStatus());
@@ -110,11 +113,11 @@ public class ImageUploadControllerTest {
         String validId = "65bf95bc9765a86be6600240";
         File fi = new File(path);
         String originalFileName = path.substring(path.lastIndexOf("/")+1,path.length());
-        MockMultipartFile mockedFile = new MockMultipartFile("newimage", originalFileName, "multipart/form-data", Files.readAllBytes(fi.toPath()));
+        MockMultipartFile mockedFile = new MockMultipartFile(newImage, originalFileName, "multipart/form-data", Files.readAllBytes(fi.toPath()));
 
        MvcResult result = mockMvc.perform(multipart(HttpMethod.PUT,"/images/catpicture/update")
                         .file(mockedFile)
-                        .param("id",validId))
+                        .param(id,validId))
                         .andReturn();
        Assertions.assertEquals(200,result.getResponse().getStatus());
     }
@@ -122,14 +125,14 @@ public class ImageUploadControllerTest {
     @Test
     public void updateImageInvalidId()throws Exception {
         String path = "src/main/resources/static/media.png";
-        String validId = "abc";
+        String inValidId = "abc";
         File fi = new File(path);
         String originalFileName = path.substring(path.lastIndexOf("/")+1,path.length());
-        MockMultipartFile mockedFile = new MockMultipartFile("newimage", originalFileName, "multipart/form-data", Files.readAllBytes(fi.toPath()));
+        MockMultipartFile mockedFile = new MockMultipartFile(newImage, originalFileName, "multipart/form-data", Files.readAllBytes(fi.toPath()));
 
         MvcResult result = mockMvc.perform(multipart(HttpMethod.PUT,"/images/catpicture/update")
                         .file(mockedFile)
-                        .param("id",validId))
+                        .param(id,inValidId))
                 .andReturn();
         Assertions.assertNotEquals(200,result.getResponse().getStatus());
     }
@@ -140,7 +143,7 @@ public class ImageUploadControllerTest {
         String validId = "65bfabdc43366e31b628cdee";
 
         MvcResult result = mockMvc.perform(delete("/images/catpicture/delete")
-                .param("id",validId))
+                .param(id,validId))
                 .andReturn();
         Assertions.assertEquals(200, result.getResponse().getStatus());
     }
@@ -150,7 +153,7 @@ public class ImageUploadControllerTest {
         String invalidId =null;
 
         MvcResult result = mockMvc.perform(delete("/images/catpicture/delete")
-                .param("id",invalidId))
+                .param(id,invalidId))
                 .andReturn();
         Assertions.assertEquals(400,result.getResponse().getStatus());
     }

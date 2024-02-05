@@ -16,7 +16,7 @@ public class CatPictureService {
    @Autowired
    private CatPictureInterface catPictureRepo;
 
-
+   // implements get a cat picture
     public ImageEntity getPictureById(String id) throws NoSuchElementException {
         Optional<CatPicture> image = catPictureRepo.findById(id);
       try {
@@ -26,6 +26,7 @@ public class CatPictureService {
       }
     }
 
+    // implements get all cat pictures
     public List<ImageEntity> getAllCatPictures() throws NullPointerException{
         List<ImageEntity> catPics = new ArrayList<>();
 
@@ -45,6 +46,7 @@ public class CatPictureService {
     }
 
 
+    // delete a cat picture
     public void deleteCatPicture(String id) throws IllegalArgumentException,NoSuchElementException {
         try {
             if(catPictureRepo.existsById(id))
@@ -55,6 +57,7 @@ public class CatPictureService {
         }
     }
 
+    // update a cat picture
     public void updateCatPicture(String id,MultipartFile file) throws IOException {
         try {
             String fileName = file.getOriginalFilename();
@@ -73,6 +76,7 @@ public class CatPictureService {
         }
     }
 
+    // upload a cat picture
     public void uploadPicture(MultipartFile file) throws IOException {
         try {
             CatPicture pic = new CatPicture();
@@ -92,6 +96,7 @@ public class CatPictureService {
         }
     }
 
+    // convert CatPicture DB object to response object ImageEntity
     public ImageEntity convertDatatoImageEntity(CatPicture cp) throws NoSuchElementException {
         ImageEntity ie = new ImageEntity();
         try {
