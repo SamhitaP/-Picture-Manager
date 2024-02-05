@@ -25,7 +25,7 @@ Click on generate to download a boiler template spring boot project, which you c
 ## MongoDB DB setup:
 
 We are using MongoDB as a database for this project, hence setup a database "imagemanager" using MongoDB Compass and copy the connection string.
-Add the connection string to **spring.data.mongodb.uri=<db-connection-string>** in application.properties.
+Add the connection string to **spring.data.mongodb.uri=`db-connection-string`** in application.properties.
 
 A sample of MongoDB connection:
 
@@ -51,7 +51,7 @@ A HTTP request **POST** method accepts any image as request parameter in multi-f
 
 ## Update a picture:
 
-A **PUT** method accepts an existing ID(as string) in the DB (of the picture you want to update) and the new picture in multi-form data as request paramaters and returns a HTTP status code /(along with a message).<br/> **No metadata can be updated using this endpoint**
+A **PUT** method accepts an existing ID(as string) in the DB (of the picture you want to update) and the new picture in multi-form data as request paramaters and returns a HTTP status code /(along with a message).br/> **No metadata can be updated using this endpoint**
 
 ## Get a cat picture by ID:
 
@@ -72,35 +72,60 @@ I'm using the most commonly used POSTMAN (Version 10.22.10) to send requests to 
 ## UPLOAD PICTURE :<br/><br/>
 
    Request :<br/>
-     URL: __POST__: http://localhost:8080/images/catpicture/upload<br/>
-     Body:<br/>
-       type: form-data<br/>
-       image: <cat-picture-file><br/>
+     URL :<br/> __POST__: `http://localhost:8080/images/catpicture/upload`<br/>
+     Body :<br/><br/>
+       type : `form-data`<br/>
+       `image` : `upload-cat-picture-file`<br/>
      Let postman contruct the __headers__ as you might run into issue when manually adding headers**<br/>
      For a CURL request the following Header(s) are needed:<br/>
-       Content-Type: multipart/form-data;<br/>
-       Accept: */*<br/>
+       Content-Type : `multipart/form-data;`<br/>
+       Accept : `*/*`<br/>
 
    Response :
-     Status : 200 OK
+     Status : `200 OK` or `400 Bad Request` or `500 Internal Server Error`
      
 ## GET PICTURE by ID :<br/><br/>
 
    Request :<br/>
-      URL: __GET__: http://localhost:8080/images/catpicture/one?id=<id-string-DB><br/><br/>
+      URL :<br/> __GET__: `http://localhost:8080/images/catpicture/one?id=id-string-DB`<br/><br/>
       
    Response :<br/>
-      Status : 200 OK or 404 Not Found<br/>
-      Body : <error-message-if-not-200><br/><br/>
+      Status : `200 OK` or `404 Not Found` or `400 Bad Request`<br/>
+      Body : `error-message-if-not-200`<br/><br/>
 
 ## GET ALL PICTURES :<br/><br/>
 
    Request :<br/>
-      URL: __GET__: http://localhost:8080/images/catpicture/all<br/><br/>
+      URL :<br/> __GET__: `http://localhost:8080/images/catpicture/all`<br/><br/>
 
    Response : <br/>
-      Status : 200 OK or 404 Not Found<br/>
-      Body : <error-message-if-not-200><br/><br/>
+      Status : `200 OK` or `404 Not Found`<br/>
+      Body : `error-message-if-not-200`<br/><br/>
+
+## UPDATE PICTURE :<br/><br/>
+
+   Request : <br/>
+      URL :<br/>__PUT__: `http://localhost:8080/images/catpicture/update?id=id-previous-image`<br/>
+      Body : <br/>
+      type : `form-data`<br/>
+      `newimage` : `upload-new-picture-file`<br/><br/>
+      
+   Reponse :<br/>
+      Status : `200 Ok` or `400 Bad Request` or `404 Not Found`<br/>
+      Body : `error-message-if-not-200`<br/><br/>
+
+## DELETE PICTURE : <br/><br/>
+
+    Request : <br/>
+        URL :<br/> __DELETE_: `http://localhost:8080/images/catpicture/delete?id=id-corresponding-image`<br/><br/>
+    Response : <br/>
+       Status : `200 Ok` or `400 Bad Request` or `404 Not Found`<br/>
+       Body: `error-message-if-not-200`<br/><br/>
+## PS: Change `spring.servlet.multipart.max-file-size=10MB`<br/>
+`spring.servlet.multipart.max-request-size=10MB` in __properties.file__ to limit the size of the picture file to upload.
+      
+
+
       
       
       
