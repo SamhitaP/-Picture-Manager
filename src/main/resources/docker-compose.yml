@@ -1,0 +1,14 @@
+version: "3"
+services:
+  imagemngrmongodb:
+    image: mongo:7.0.2
+    container_name: imagemngrmongodb
+    ports:
+      - 27017:27017
+  catpicturesimage:
+    image: catpicturesimage
+    container_name: catpicturesimage
+    ports:
+      - 8080:8080
+    links:
+      - imagemngrmongodb
