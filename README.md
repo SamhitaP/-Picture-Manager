@@ -22,7 +22,7 @@ A sample of spring initializr settings to select :
 Add Dependencies in the above step and select dependencies like Spring Web,Lombok, Spring Data JPA and Spring Boot Dev Tools.
 Click on generate to download a boiler template spring boot project, which you can build on top of.
 
-## MongoDB DB setup: 
+## Local MongoDB DB setup: 
 
 We are using MongoDB as a database for this project, hence setup a database `imagemanager` using MongoDB Compass(Download here: https://www.mongodb.com/try/download/compass) and copy the connection string.<br/>
 Download Mongod on mac in terminal:  `brew install mongodb-community@7.0` (Install homebrew first, if required)<br/>
@@ -38,12 +38,34 @@ Select any IDE that supports Java, in this case we are using IntelliJ IDEA 2023.
 Make sure to add or download openjdk-21 to the project modules and then run `mvn clean install` which cleans/deletes all of the downloaded dependency resources.<br/>
 Run `mvn compile` to compile the code and resolve any errors that occur.
 
-## Start application:
-
-Next,run the `ImageManagerApplication` file under src/main/java in the project and this should start your service.<br/>
+In IDE run the `ImageManagerApplication` file under src/main/java in the project and this should start your service.<br/>
 The terminal log during the run indicates the port number being used as `Tomcat initialized with port 8080 (http)`<br/>
 If 8080 is unavailable you can choose the port number used to run the application, in `application.properties`, by adding `server.port=<port_number>`
 
+# Run the project using docker image:
+
+1. Install docker using this link https://docs.docker.com/get-docker/, just follow the steps according to the documentation<br/>
+2. I used https://docs.docker.com/desktop/install/mac-install/ for installation on mac<br/>
+3. Verify docker is installed using `docker --version` in the terminal<br/>
+4. Run cmd `docker load -i <path to tar file>`, here tar file is the downloaded project image<br/>
+5. `docker images` should list the image `catpicturesimage`<br/>
+6. Now, go to path `Picture-Manager/src/main/resources/docker-compose.yml` in your terminal and run cmd `docker-compose up`<br/>
+7. This will show you the tomcat log in the terminal<br/><br/>
+   
+<img width="1243" alt="Screenshot 2024-02-05 at 9 25 25 PM" src="https://github.com/SamhitaP/-Picture-Manager/assets/15332866/3ed0b132-6d5c-4a16-8540-5fa5ddd08344">
+
+# Testing:
+ I'm using the most commonly used POSTMAN (Version 10.22.10) to send requests to the APIs.<br/>
+ Here are some of endpoints that I have accessed through the postman:<br/><br/>
+
+ Upload Cat Picture Endpoint:<br/>
+ 
+ <img width="978" alt="Screenshot 2024-02-05 at 9 28 51 PM" src="https://github.com/SamhitaP/-Picture-Manager/assets/15332866/2d014594-7325-4a93-bd17-72de5f9bb443">
+
+ Get A Cat Pictures Endpoint:<br/>
+ 
+ <img width="984" alt="Screenshot 2024-02-05 at 9 28 36 PM" src="https://github.com/SamhitaP/-Picture-Manager/assets/15332866/8f375b9b-e5b1-42e5-98e5-b2286d1338ad">
+ 
 # API Behavior:
 
 ## Upload a picture:
@@ -67,8 +89,6 @@ A `GET` method doesn't require any request parameters, returns the list of all c
 A `DELETE` method accepts the picture ID string as request parameter to delete the corresponding cat picture in DB and returns a 200 on success or a message "Cannot delete cat picture with ID" with 404 on error.
 
 # How to request the APIs:
-
-I'm using the most commonly used POSTMAN (Version 10.22.10) to send requests to the APIs but you can use CURL as well.
 
 ## UPLOAD PICTURE :<br/><br/>
 
@@ -126,7 +146,7 @@ I'm using the most commonly used POSTMAN (Version 10.22.10) to send requests to 
 ## PS: Change `spring.servlet.multipart.max-file-size=10MB`<br/>
 `spring.servlet.multipart.max-request-size=10MB` in __properties.file__ to limit the size of the picture file to upload.
 
-# TESTS:<br/>
+# TEST CASES :<br/>
  (@Disbaled test cases for write operations, comment out this annotation when running the test cases)
   ## Upload Image Test Cases:
    1. Run  `uploadImageTestSuccess()` - upload a cat picture successfully to the DB, add the image to `src/main/resources/static` and update String path = "src/main/resources/static/`10MB.jpeg`"; with the new file name.<br/>
@@ -142,6 +162,7 @@ I'm using the most commonly used POSTMAN (Version 10.22.10) to send requests to 
  ## Delete Image Test Cases:
     1. Run `deleteImageId()` - delete a cat picture from the DB using an existing ID in the DB corresponding to the cat picture that needs to be deleted.<br/>
     2. Run `deleteImageByInvalidId()` - check if we can delete a cat picture with an invalid ID that is null and it returns an error response.<br/><br/>
+
     
   
   
