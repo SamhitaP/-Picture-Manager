@@ -136,10 +136,9 @@ A `DELETE` method accepts the picture ID string as request parameter to delete t
       Body : `error-message-if-not-200`<br/><br/>
 
 ## DELETE PICTURE : <br/><br/>
-
-    Request : <br/>
+   Request : <br/>
         URL <br/> __DELETE_: `http://localhost:8080/images/catpicture/delete?id=<id-corresponding-image>`<br/><br/>
-    Response : <br/>
+   Response : <br/>
        Status : `200 Ok` or `400 Bad Request` or `404 Not Found`<br/>
        Body: `error-message-if-not-200`<br/><br/>
        
@@ -152,16 +151,16 @@ A `DELETE` method accepts the picture ID string as request parameter to delete t
    1. Run  `uploadImageTestSuccess()` - upload a cat picture successfully to the DB, add the image to `src/main/resources/static` and update String path = "src/main/resources/static/`10MB.jpeg`"; with the new file name.<br/>
    2. Run `uploadImageBadReques()` - test uploading an empty picture file and receive a bad request error response.<br/><br/>
   ## Get an Image Test Cases:
-    1. Run `getImageValidId()` - get a cat picture using a valid picture ID that exists in the DB and a corresponding picture is available.<br/>
-    2. Run `getImageByInvalidId()` - send an empty/null ID in request and receive an error message and status code.<br/><br/>
+   1. Run `getImageValidId()` - get a cat picture using a valid picture ID that exists in the DB and a corresponding picture is available.<br/>
+   2. Run `getImageByInvalidId()` - send an empty/null ID in request and receive an error message and status code.<br/><br/>
   ## Get all Images Test Cases:
-    1. Run `getAllCatPicturesSuccess()` - get all existing cat pictures in the DB so DB should contain at least one cat picture to return.<br/>
+   1. Run `getAllCatPicturesSuccess()` - get all existing cat pictures in the DB so DB should contain at least one cat picture to return.<br/>
   ## Update Image Test Cases:
-    1. Run `updateImageById()` - update an existing cat picture using its ID and replace it with another cat picture.<br/> Note: Can update the file name as part of the multi-form data body.<br/>
-    2. Run `updateImageInvalidId()` - check if we can update a cat picture with an ID that does not exist in the DB and it returns an error status code.<br/><br/>
+   1. Run `updateImageById()` - update an existing cat picture using its ID and replace it with another cat picture.<br/> Note: Can update the file name as part of the multi-form data body.<br/>
+   2. Run `updateImageInvalidId()` - check if we can update a cat picture with an ID that does not exist in the DB and it returns an error status code.<br/><br/>
  ## Delete Image Test Cases:
-    1. Run `deleteImageId()` - delete a cat picture from the DB using an existing ID in the DB corresponding to the cat picture that needs to be deleted.<br/>
-    2. Run `deleteImageByInvalidId()` - check if we can delete a cat picture with an invalid ID that is null and it returns an error response.<br/><br/>
+   1. Run `deleteImageId()` - delete a cat picture from the DB using an existing ID in the DB corresponding to the cat picture that needs to be deleted.<br/>
+   2. Run `deleteImageByInvalidId()` - check if we can delete a cat picture with an invalid ID that is null and it returns an error response.<br/><br/>
 
     
   
