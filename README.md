@@ -34,14 +34,14 @@ A sample of MongoDB connection:
 
 ## IDE setup:
 
-Select any IDE that supports Java, in this case we are using IntelliJ IDEA 2023.3.2 and open the generated project in this.
-Make sure to add or download openjdk-21 to the project modules and then run `mvn clean install` which cleans/deletes all of the downloaded dependency resources.
+Select any IDE that supports Java, in this case we are using IntelliJ IDEA 2023.3.2 and open the generated project in this.<br/>
+Make sure to add or download openjdk-21 to the project modules and then run `mvn clean install` which cleans/deletes all of the downloaded dependency resources.<br/>
 Run `mvn compile` to compile the code and resolve any errors that occur.
 
 ## Start application:
 
-Next,run the `ImageManagerApplication` file under src/main/java in the project and this should start your service.
-The terminal log during the run indicates the port number being used as `Tomcat initialized with port 8080 (http)`
+Next,run the `ImageManagerApplication` file under src/main/java in the project and this should start your service.<br/>
+The terminal log during the run indicates the port number being used as `Tomcat initialized with port 8080 (http)`<br/>
 If 8080 is unavailable you can choose the port number used to run the application, in `application.properties`, by adding `server.port=<port_number>`
 
 # API Behavior:
@@ -88,7 +88,7 @@ I'm using the most commonly used POSTMAN (Version 10.22.10) to send requests to 
 ## GET PICTURE by ID :<br/><br/>
 
    Request :<br/>
-      URL <br/> __GET__: `http://localhost:8080/images/catpicture/one?id=id-string-DB`<br/><br/>
+      URL <br/> __GET__: `http://localhost:8080/images/catpicture/one?id=<id-string-DB>`<br/><br/>
       
    Response :<br/>
       Status : `200 OK` or `404 Not Found` or `400 Bad Request`<br/>
@@ -106,7 +106,7 @@ I'm using the most commonly used POSTMAN (Version 10.22.10) to send requests to 
 ## UPDATE PICTURE :<br/><br/>
 
    Request : <br/>
-      URL <br/>__PUT__: `http://localhost:8080/images/catpicture/update?id=id-previous-image`<br/>
+      URL <br/>__PUT__: `http://localhost:8080/images/catpicture/update?id=<id-previous-image>`<br/>
       Body : <br/>
       type : `form-data`<br/>
       `newimage` : `upload-new-picture-file`<br/><br/>
@@ -118,7 +118,7 @@ I'm using the most commonly used POSTMAN (Version 10.22.10) to send requests to 
 ## DELETE PICTURE : <br/><br/>
 
     Request : <br/>
-        URL <br/> __DELETE_: `http://localhost:8080/images/catpicture/delete?id=id-corresponding-image`<br/><br/>
+        URL <br/> __DELETE_: `http://localhost:8080/images/catpicture/delete?id=<id-corresponding-image>`<br/><br/>
     Response : <br/>
        Status : `200 Ok` or `400 Bad Request` or `404 Not Found`<br/>
        Body: `error-message-if-not-200`<br/><br/>
@@ -126,7 +126,8 @@ I'm using the most commonly used POSTMAN (Version 10.22.10) to send requests to 
 ## PS: Change `spring.servlet.multipart.max-file-size=10MB`<br/>
 `spring.servlet.multipart.max-request-size=10MB` in __properties.file__ to limit the size of the picture file to upload.
 
-# TESTS:
+# TESTS:<br/>
+ (@Disbaled test cases for write operations, comment out this annotation when running the test cases)
   ## Upload Image Test Cases:
    1. Run  `uploadImageTestSuccess()` - upload a cat picture successfully to the DB, add the image to `src/main/resources/static` and update String path = "src/main/resources/static/`10MB.jpeg`"; with the new file name.<br/>
    2. Run `uploadImageBadReques()` - test uploading an empty picture file and receive a bad request error response.<br/><br/>
