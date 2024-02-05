@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
+// Controller handles CRUD operations for cat pictures
 @RestController
 @RequestMapping("/images")
 public class ImageUploadController {
@@ -18,6 +19,7 @@ public class ImageUploadController {
     @Autowired
     CatPictureService catPictureService;
 
+    // get one cat picture
     @RequestMapping(value="/catpicture/one",method = RequestMethod.GET)
     public ResponseEntity<?> getImageById(@RequestParam("id") String id) {
         if(id == null)
@@ -30,6 +32,7 @@ public class ImageUploadController {
         }
     }
 
+    // get all cat pictures
     @RequestMapping(value="/catpicture/all",method=RequestMethod.GET)
     public ResponseEntity<?> getAllCatPictures() {
         try {
@@ -40,6 +43,7 @@ public class ImageUploadController {
         }
     }
 
+    // upload a new cat picture
     @RequestMapping(value="/catpicture/upload",method = RequestMethod.POST)
     public ResponseEntity<?> uploadCatPicture(@RequestParam("image") MultipartFile file) {
         if(file == null || file.isEmpty()) {
@@ -53,6 +57,7 @@ public class ImageUploadController {
         }
     }
 
+    // delete a cat picture
     @RequestMapping(value="/catpicture/delete",method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteCatPicture(@RequestParam("id") String id) {
         if(id == null)
@@ -65,6 +70,7 @@ public class ImageUploadController {
         }
     }
 
+    // update an existing cat picture
     @RequestMapping(value="/catpicture/update",method=RequestMethod.PUT)
     public ResponseEntity<?> updateCatPicture(@RequestParam("id") String id,@RequestParam("newimage") MultipartFile file) {
         if(id == null || file == null || file.isEmpty())

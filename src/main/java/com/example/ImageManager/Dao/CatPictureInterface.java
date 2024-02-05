@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+//Interface to perform MongoDB operations using JPA
 @Component
 public interface CatPictureInterface extends MongoRepository<CatPicture,String> {
        Optional<CatPicture> findById(String id);

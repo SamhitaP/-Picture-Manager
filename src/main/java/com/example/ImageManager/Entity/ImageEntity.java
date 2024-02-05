@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
+// Response Entity for cat picture file
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
