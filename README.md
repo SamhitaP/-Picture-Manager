@@ -72,7 +72,7 @@ I'm using the most commonly used POSTMAN (Version 10.22.10) to send requests to 
 ## UPLOAD PICTURE :<br/><br/>
 
    Request :<br/>
-     URL :<br/> __POST__: `http://localhost:8080/images/catpicture/upload`<br/>
+     URL <br/> __POST__: `http://localhost:8080/images/catpicture/upload`<br/>
      Body :<br/><br/>
        type : `form-data`<br/>
        `image` : `upload-cat-picture-file`<br/>
@@ -87,7 +87,7 @@ I'm using the most commonly used POSTMAN (Version 10.22.10) to send requests to 
 ## GET PICTURE by ID :<br/><br/>
 
    Request :<br/>
-      URL :<br/> __GET__: `http://localhost:8080/images/catpicture/one?id=id-string-DB`<br/><br/>
+      URL <br/> __GET__: `http://localhost:8080/images/catpicture/one?id=id-string-DB`<br/><br/>
       
    Response :<br/>
       Status : `200 OK` or `404 Not Found` or `400 Bad Request`<br/>
@@ -96,7 +96,7 @@ I'm using the most commonly used POSTMAN (Version 10.22.10) to send requests to 
 ## GET ALL PICTURES :<br/><br/>
 
    Request :<br/>
-      URL :<br/> __GET__: `http://localhost:8080/images/catpicture/all`<br/><br/>
+      URL <br/> __GET__: `http://localhost:8080/images/catpicture/all`<br/><br/>
 
    Response : <br/>
       Status : `200 OK` or `404 Not Found`<br/>
@@ -105,7 +105,7 @@ I'm using the most commonly used POSTMAN (Version 10.22.10) to send requests to 
 ## UPDATE PICTURE :<br/><br/>
 
    Request : <br/>
-      URL :<br/>__PUT__: `http://localhost:8080/images/catpicture/update?id=id-previous-image`<br/>
+      URL <br/>__PUT__: `http://localhost:8080/images/catpicture/update?id=id-previous-image`<br/>
       Body : <br/>
       type : `form-data`<br/>
       `newimage` : `upload-new-picture-file`<br/><br/>
@@ -117,12 +117,32 @@ I'm using the most commonly used POSTMAN (Version 10.22.10) to send requests to 
 ## DELETE PICTURE : <br/><br/>
 
     Request : <br/>
-        URL :<br/> __DELETE_: `http://localhost:8080/images/catpicture/delete?id=id-corresponding-image`<br/><br/>
+        URL <br/> __DELETE_: `http://localhost:8080/images/catpicture/delete?id=id-corresponding-image`<br/><br/>
     Response : <br/>
        Status : `200 Ok` or `400 Bad Request` or `404 Not Found`<br/>
        Body: `error-message-if-not-200`<br/><br/>
+       
 ## PS: Change `spring.servlet.multipart.max-file-size=10MB`<br/>
 `spring.servlet.multipart.max-request-size=10MB` in __properties.file__ to limit the size of the picture file to upload.
+
+# TESTS:
+  ## Upload Image Test Cases:
+   1. Run  `uploadImageTestSuccess()` - upload a cat picture successfully to the DB, add the image to `src/main/resources/static` and update String path = "src/main/resources/static/`10MB.jpeg`"; with the new file name.<br/>
+   2. Run `uploadImageBadReques()` - test uploading an empty picture file and receive a bad request error response.<br/><br/>
+  ## Get an Image Test Cases:
+    1. Run `getImageValidId()` - get a cat picture using a valid picture ID that exists in the DB and a corresponding picture is available.<br/>
+    2. Run `getImageByInvalidId()` - send an empty/null ID in request and receive an error message and status code.<br/><br/>
+  ## Get all Images Test Cases:
+    1. Run `getAllCatPicturesSuccess()` - get all existing cat pictures in the DB so DB should contain at least one cat picture to return.<br/>
+  ## Update Image Test Cases:
+    1. Run `updateImageById()` - update an existing cat picture using its ID and replace it with another cat picture.<br/> Note: Can update the file name as part of the multi-form data body.<br/>
+    2. Run `updateImageInvalidId()` - check if we can update a cat picture with an ID that does not exist in the DB and it returns an error status code.<br/><br/>
+ ## Delete Image Test Cases:
+    1. Run `deleteImageId()` - delete a cat picture from the DB using an existing ID in the DB corresponding to the cat picture that needs to be deleted.<br/>
+    2. Run `deleteImageByInvalidId()` - check if we can delete a cat picture with an invalid ID that is null and it returns an error response.<br/><br/>
+    
+  
+  
       
 
 
