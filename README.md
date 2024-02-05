@@ -22,10 +22,11 @@ A sample of spring initializr settings to select :
 Add Dependencies in the above step and select dependencies like Spring Web,Lombok, Spring Data JPA and Spring Boot Dev Tools.
 Click on generate to download a boiler template spring boot project, which you can build on top of.
 
-## MongoDB DB setup:
+## MongoDB DB setup: 
 
-We are using MongoDB as a database for this project, hence setup a database "imagemanager" using MongoDB Compass and copy the connection string.
-Add the connection string to **spring.data.mongodb.uri=`db-connection-string`** in application.properties.
+We are using MongoDB as a database for this project, hence setup a database `imagemanager` using MongoDB Compass(Download here: https://www.mongodb.com/try/download/compass) and copy the connection string.<br/>
+Download Mongod on mac in terminal:  `brew install mongodb-community@7.0` (Install homebrew first, if required)<br/>
+Add the connection string to `spring.data.mongodb.uri=<db-connection-string>` in application.properties.
 
 A sample of MongoDB connection:
 
@@ -34,36 +35,36 @@ A sample of MongoDB connection:
 ## IDE setup:
 
 Select any IDE that supports Java, in this case we are using IntelliJ IDEA 2023.3.2 and open the generated project in this.
-Make sure to add or download openjdk-21 to the project modules and then run **mvn clean install** which cleans/deletes all of the downloaded dependency resources.
-Run **mvn compile** to compile the code and resolve any errors that occur.
+Make sure to add or download openjdk-21 to the project modules and then run `mvn clean install` which cleans/deletes all of the downloaded dependency resources.
+Run `mvn compile` to compile the code and resolve any errors that occur.
 
 ## Start application:
 
-Next,run the **ImageManagerApplication** file under src/main/java in the project and this should start your service.
-The terminal log during the run indicates the port number being used as **Tomcat initialized with port 8080 (http)**
-If 8080 is unavailable you can choose the port number used to run the application, in **application.properties**, by adding **server.port=<port_number>**
+Next,run the `ImageManagerApplication` file under src/main/java in the project and this should start your service.
+The terminal log during the run indicates the port number being used as `Tomcat initialized with port 8080 (http)`
+If 8080 is unavailable you can choose the port number used to run the application, in `application.properties`, by adding `server.port=<port_number>`
 
 # API Behavior:
 
 ## Upload a picture:
 
-A HTTP request **POST** method accepts any image as request parameter in multi-form data format and returns a HTTP status code 201(along with a message) or an error message.
+A HTTP request `POST` method accepts any image as request parameter in multi-form data format and returns a HTTP status code 201(along with a message) or an error message.
 
 ## Update a picture:
 
-A **PUT** method accepts an existing ID(as string) in the DB (of the picture you want to update) and the new picture in multi-form data as request paramaters and returns a HTTP status code /(along with a message).br/> **No metadata can be updated using this endpoint**
+A `PUT` method accepts an existing ID(as string) in the DB (of the picture you want to update) and the new picture in multi-form data as request paramaters and returns a HTTP status code /(along with a message).br/>
 
 ## Get a cat picture by ID:
 
-A **GET** method accepts an existing ID string(in DB) as a request parameter and returns the cat picture, name and ID as an object along with HTTP status code 200 and if image if not found it returns ""No data found for the ID, error " with status 404.
+A `GET` method accepts an existing ID string(in DB) as a request parameter and returns the cat picture, name and ID as an object along with HTTP status code 200 and if image if not found it returns ""No data found for the ID, error " with status 404.
 
 ## Get all cat pictures:
 
-A **GET** method doesn't require any request parameters, returns the list of all cat pictures in the DB (cat picture, name and ID object as a picture) with HTTP status code 200 or else returns a 404.
+A `GET` method doesn't require any request parameters, returns the list of all cat pictures in the DB (cat picture, name and ID object as a picture) with HTTP status code 200 or else returns a 404.
 
 ## Delete a cat picture:
 
-A **DELETE** method accepts the picture ID string as request parameter to delete the corresponding cat picture in DB and returns a 200 on success or a message "Cannot delete cat picture with ID" with 404 on error.
+A `DELETE` method accepts the picture ID string as request parameter to delete the corresponding cat picture in DB and returns a 200 on success or a message "Cannot delete cat picture with ID" with 404 on error.
 
 # How to request the APIs:
 
