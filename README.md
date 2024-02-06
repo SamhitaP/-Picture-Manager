@@ -10,6 +10,10 @@ Build RESTful APIs to manage cat pictures and perform CRUD operations
 • Get a cat image by ID <br/>
 • Get a list of all the uploaded cat pictures <br/>
 
+# Tech used:
+• Java Spring Boot
+• MongoDB
+
 # Project Setup:
 
 The project is built using **Java**, openjdk-21 with Spring Boot framework and a NoSQL database **mongodb**
